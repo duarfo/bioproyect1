@@ -13,9 +13,7 @@ def parsing(fasta):
         for base in line:
             if base:
                 base_count += 1
-
     print('Your sequence has', base_count, 'base pairs!')
     print('Your Sequence has', len(real_lines), 'lines of code!')
-
 
 parsing('sequence.fasta.txt')
