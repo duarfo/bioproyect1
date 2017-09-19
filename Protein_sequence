@@ -1,12 +1,14 @@
+from re import *
 
 class Sequence:
     def __init__(self, fasta):
         self.f = fasta
-        self.lines, self.count = self.parsing(fasta)
+        self.lines, self.count = self.parsing()
+        self.string = "".join(self.lines)
 
-    def parsing(self, fasta):
+    def parsing(self):
 
-        file = open(fasta, 'r')
+        file = open(self.f, 'r')
         y = file.read()
         real_lines = y.split('\n')
         base_count = 0
@@ -23,7 +25,3 @@ class Sequence:
         print('Your Sequence has', len(real_lines), 'lines of code!')
         return real_lines, base_count
 
-
-var = Sequence('sequence.fasta.txt')
-
-print(var.count, var.lines)
