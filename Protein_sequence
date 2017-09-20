@@ -1,13 +1,14 @@
-from re import *
+import re
+
 
 class Sequence:
     def __init__(self, fasta):
         self.f = fasta
         self.lines, self.count = self.parsing()
         self.string = "".join(self.lines)
+        self.proteins = self.protein_search()
 
     def parsing(self):
-
         file = open(self.f, 'r')
         y = file.read()
         real_lines = y.split('\n')
@@ -24,4 +25,16 @@ class Sequence:
         print('Your sequence has', base_count, 'base pairs!')
         print('Your Sequence has', len(real_lines), 'lines of code!')
         return real_lines, base_count
+
+    # def protein_search(self):
+        #pattern = r"(A[UT]G)([A-Z]{3})*(([UT]AA)|([UT]AG)|([UT]GA))"
+        #data = re.search(pattern, self.string)
+        #plist = []
+        #while True:
+            #if data is not None:
+                #plist.append(data.string)
+
+
+            #else:
+                #break
 
