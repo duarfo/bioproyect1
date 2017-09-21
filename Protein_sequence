@@ -6,7 +6,7 @@ class Sequence:
         self.f = fasta
         self.lines, self.count = self.parsing()
         self.string = "".join(self.lines)
-        self.proteins = self.protein_search()
+        self.proteins_start = self.protein_search()
 
     def parsing(self):
         file = open(self.f, 'r')
@@ -26,7 +26,22 @@ class Sequence:
         print('Your Sequence has', len(real_lines), 'lines of code!')
         return real_lines, base_count
 
-    # def protein_search(self):
+    def protein_search(self):
+        protein_start = []
+        split_list = self.string
+        while True:
+            partition_list = split_list.partition('ATG')
+            pre_protein = partition_list[1] + partition_list[2]
+            protein_start.append(pre_protein)
+            split_list = partition_list[2]
+            if len(split_list) < 4:
+                break
+        return protein_start
+
+    def print_protein_list(self,p_list):
+        for element in p_list:
+            print(element[0:20])
+
         #pattern = r"(A[UT]G)([A-Z]{3})*(([UT]AA)|([UT]AG)|([UT]GA))"
         #data = re.search(pattern, self.string)
         #plist = []
@@ -38,3 +53,7 @@ class Sequence:
             #else:
                 #break
 
+s = Sequence("sequence.fasta.txt")
+s.protein_search()
+print(len(s.proteins_start))
+s.print_protein_list(s.proteins_start)
