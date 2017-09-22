@@ -7,6 +7,7 @@ class Sequence:
         self.lines, self.count = self.parsing()
         self.string = "".join(self.lines)
         self.proteins_start = self.protein_search()
+        self.actual_proteins = self.protein_finish()
 
     def parsing(self):
         file = open(self.f, 'r')
@@ -38,22 +39,22 @@ class Sequence:
                 break
         return protein_start
 
+    def protein_finish(self):
+        real_proteins = []
+        for element in self.proteins_start:
+            # PATTERN CHECK
+            pattern = r"(A[UT]G)([A-Z]{3})*(([UT]AA)|([UT]AG)|([UT]GA))"
+            search = re.search(pattern, element)
+            if search:
+                real_proteins.append(search.group())
+
+        print('found', len(real_proteins), 'proteins')
+        return real_proteins
+
     def print_protein_list(self,p_list):
         for element in p_list:
-            print(element[0:20])
+            print(element[0:10],'...',element[-4:-1] ,'size', len(element), 'bp')
 
-        #pattern = r"(A[UT]G)([A-Z]{3})*(([UT]AA)|([UT]AG)|([UT]GA))"
-        #data = re.search(pattern, self.string)
-        #plist = []
-        #while True:
-            #if data is not None:
-                #plist.append(data.string)
-
-
-            #else:
-                #break
 
 s = Sequence("sequence.fasta.txt")
-s.protein_search()
-print(len(s.proteins_start))
-s.print_protein_list(s.proteins_start)
+s.print_protein_list(s.actual_proteins)
