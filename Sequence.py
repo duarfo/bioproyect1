@@ -1,5 +1,6 @@
 import re
 import amino_acid_dictionary
+import Weight_dictionary
 
 class Sequence:
     def __init__(self, fasta):
@@ -71,6 +72,7 @@ class Protein:
         Protein.counter += 1
         self.base_list = self.pre_translate()
         self.amino_list = self.translate()
+        self.Kda_weight = self.weight()
 
     def pre_translate(self):
         seq = self.base_sequence
@@ -93,6 +95,14 @@ class Protein:
         return list0
 
     def weight(self):
+        protein = self.amino_list
+        dict0 = Weight_dictionary.Kda_weight
+        weight = 0
+        for base in protein:
+            val = dict0[base]
+            weight += val
+        return weight
+
 
 
 
@@ -101,3 +111,4 @@ s.protein_factory()
 b = s.protein_object_list[0]
 print(b.base_list)
 print(b.amino_list)
+print(b.Kda_weight)
