@@ -1,5 +1,5 @@
 import re
-
+import amino_acid_dictionary
 
 class Sequence:
     def __init__(self, fasta):
@@ -70,6 +70,7 @@ class Protein:
         self.base_sequence = base_sequence
         Protein.counter += 1
         self.base_list = self.pre_translate()
+        self.amino_list = self.translate()
 
     def pre_translate(self):
         seq = self.base_sequence
@@ -83,8 +84,17 @@ class Protein:
                 break
         return list1
 
+    def translate(self):
+        bases = self.base_list
+        dict0 = amino_acid_dictionary.amino_acids
+        list0 =[]
+        for base in bases:
+            list0.append(dict0[base])
+        return list0
+
 
 s = Sequence("sequence.fasta.txt")
 s.protein_factory()
 b = s.protein_object_list[0]
 print(b.base_list)
+print(b.amino_list)
