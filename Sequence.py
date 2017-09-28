@@ -92,6 +92,9 @@ class Protein:
             list0.append(dict0[base])
         return list0
 
+    def weight(self):
+
+
 
 s = Sequence("sequence.fasta.txt")
 s.protein_factory()
