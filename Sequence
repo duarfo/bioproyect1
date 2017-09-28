@@ -8,6 +8,7 @@ class Sequence:
         self.string = "".join(self.lines)
         self.proteins_start = self.protein_search()
         self.actual_proteins = self.protein_finish()
+        self.protein_object_list = []
 
     def parsing(self):
         file = open(self.f, 'r')
@@ -54,7 +55,36 @@ class Sequence:
             print(element[0:5],'...',element[-5:],'size', len(element), 'bp')
 
     def protein_factory(self):
-     
+        for idx, val in enumerate(self.actual_proteins):
+            nid = idx+1
+            self.protein_object_list.append(Protein(self.f, nid, val))
+        print(Protein.counter)
+
+
+class Protein:
+    counter = 0
+
+    def __init__(self, fasta, number, base_sequence):
+        self.fasta_origin = fasta
+        self.order_in_fasta = number
+        self.base_sequence = base_sequence
+        Protein.counter += 1
+        self.base_list = self.pre_translate()
+
+    def pre_translate(self):
+        seq = self.base_sequence
+        index0 = 0
+        list1 = []
+        while True:
+            c = seq[index0:(index0+3)]
+            list1.append(c)
+            index0 += 3
+            if index0 >= (len(seq)):
+                break
+        return list1
 
 
 s = Sequence("sequence.fasta.txt")
+s.protein_factory()
+b = s.protein_object_list[0]
+print(b.base_list)
