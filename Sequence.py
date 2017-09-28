@@ -104,11 +104,15 @@ class Protein:
             weight += val
         return weight
 
-
-
-
-s = Sequence("sequence.fasta.txt")
-b = s.protein_object_list[0]
-print(b.base_list)
-print(b.amino_list)
-print(b.Kda_weight)
+    def protein_display(self):
+        print('Your protein has', len(self.base_sequence))
+        print('It has', (len(self.amino_list)-1), 'amino acids and a weight of', self.Kda_weight, 'KDa')
+        while True:
+            print('Type "a" to see the amino acid sequence, "b" to see the base sequence and "q" to quit')
+            answer = input('>')
+            if answer == 'a':
+                print(self.amino_list)
+            if answer == 'b':
+                print(self.base_sequence)
+            if answer == 'q':
+                break
