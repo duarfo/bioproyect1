@@ -9,7 +9,7 @@ class Sequence:
         self.string = "".join(self.lines)
         self.proteins_start = self.protein_search()
         self.actual_proteins = self.protein_finish()
-        self.protein_object_list = []
+        self.protein_object_list = self.protein_factory()
 
     def parsing(self):
         file = open(self.f, 'r')
@@ -56,10 +56,11 @@ class Sequence:
             print(element[0:5],'...',element[-5:],'size', len(element), 'bp')
 
     def protein_factory(self):
+        list0 = []
         for idx, val in enumerate(self.actual_proteins):
             nid = idx+1
-            self.protein_object_list.append(Protein(self.f, nid, val))
-        print(Protein.counter)
+            list0.append(Protein(self.f, nid, val))
+        return list0
 
 
 class Protein:
@@ -107,7 +108,6 @@ class Protein:
 
 
 s = Sequence("sequence.fasta.txt")
-s.protein_factory()
 b = s.protein_object_list[0]
 print(b.base_list)
 print(b.amino_list)
