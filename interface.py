@@ -1,13 +1,48 @@
 from Sequence import *
 
-#TODO pass s as a paramter. Move compare() to sequence or Protein class
-def compare():
-    suspect_protein = []
-    for protein in s.protein_object_list:
-        x = protein.Kda_weight / float(size)
-        if (1 + float(error)) >= x >= (1 - float(error)):
-            suspect_protein.append(protein)
-    return suspect_protein
+
+def protein_display(protein):
+    # It is a display function that makes the display of the protein more simple and easier to read. It needs a protein
+    # object in order to work properly.
+    print('Your protein has', len(protein.base_sequence), 'Base Sequences')
+    print('It has', (len(protein.amino_list) - 1), 'amino acids and a weight of', protein.Kda_weight, 'KDa')
+    while True:
+        print('Type "a" to see the amino acid sequence, "b" to see the base sequence and "q" to quit')
+        answer = input('>')
+        if answer == 'a':
+            x = len(protein.amino_list)
+            y = x / 10
+            print_size = 10
+            y_ground = math.floor(y)
+            if x <= print_size:
+                print(protein.amino_list)
+            if x > print_size:
+                s_index = 0
+                n_index = print_size
+                for c in range(int(y_ground)):
+                    print(protein.amino_list[s_index:n_index])
+                    s_index += print_size
+                    n_index += print_size
+                    if n_index >= x:
+                        print(protein.amino_list[s_index:])
+        if answer == 'b':
+            x = len(protein.base_list)
+            y = x / 10
+            print_size = 10
+            y_ground = math.floor(y)
+            if x <= print_size:
+                print(protein.base_list)
+            if x > print_size:
+                s_index = 0
+                n_index = print_size
+                for c in range(int(y_ground)):
+                    print(protein.base_list[s_index:n_index])
+                    s_index += print_size
+                    n_index += print_size
+                    if n_index >= x:
+                        print(protein.base_list[s_index:])
+        if answer == 'q':
+            break
 
 
 while True:
@@ -33,7 +68,8 @@ while True:
 
     error = input('>')
 
-    suspect_proteins = compare()
+    suspect_proteins = s.compare(size, error)
+
     print('We found', len(suspect_proteins), 'proteins with comparable sizes')
 
     if len(suspect_proteins) > 0:
@@ -47,6 +83,6 @@ while True:
                 if int(index) <= len(suspect_proteins):
                     index0 = (int(index) - 1)
                     b = suspect_proteins[index0]
-                    b.protein_display()
+                    protein_display(b)
             else:
                 break
