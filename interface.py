@@ -45,7 +45,7 @@ while True:
                 break
             if index.isdigit():
                 if int(index) <= len(suspect_proteins):
-                    index0 = (int(index) -1)
+                    index0 = (int(index) - 1)
                     b = suspect_proteins[index0]
                     b.protein_display()
             else:
