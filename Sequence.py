@@ -5,6 +5,7 @@ import math
 
 
 class Sequence:
+    #TODO say here what your class does.
     def __init__(self, fasta):
         self.f = fasta
         self.lines, self.count = self.parsing()
@@ -14,6 +15,7 @@ class Sequence:
         self.protein_object_list = self.protein_factory()
 
     def parsing(self):
+        #TODO add description for each method here. say what the method does here.
         file = open(self.f, 'r')
         y = file.read()
         real_lines = y.split('\n')
@@ -32,6 +34,7 @@ class Sequence:
         return real_lines, base_count
 
     def protein_search(self):
+        #TODO here too etc.
         protein_start = []
         split_list = self.string
         while True:
