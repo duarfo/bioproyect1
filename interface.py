@@ -1,4 +1,19 @@
 from Sequence import *
+import math
+import matplotlib.pyplot as plt
+
+
+def plot(prot_list):
+
+    x_axis = []
+    y_axis = []
+    for protein in prot_list:
+        x_axis.append(protein.Kda_weight)
+        y_axis.append(len(protein.amino_list))
+    plt.scatter(x_axis, y_axis)
+    plt.xlabel('Weigh (Kda)')
+    plt.ylabel('Number of Amino Acids')
+    plt.show()
 
 
 def protein_display(protein):
@@ -69,6 +84,7 @@ while True:
     error = input('>')
 
     suspect_proteins = s.compare(size, error)
+    plot(suspect_proteins)
 
     print('We found', len(suspect_proteins), 'proteins with comparable sizes')
 
@@ -76,6 +92,11 @@ while True:
         while True:
             print('Witch one would you like to see? (type in a number between 1 and', len(suspect_proteins),
                   'type something else to quit)')
+            count = 1
+            for protein in suspect_proteins:
+                bb = str(protein.Kda_weight)
+                print('Protein', count, 'has', len(protein.amino_list), 'and weights', bb[:5])
+                count += 1
             index = (input('>'))
             if index.isalpha():
                 break

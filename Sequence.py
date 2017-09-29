@@ -1,7 +1,7 @@
 import re
 import amino_acid_dictionary
 import Weight_dictionary
-import math
+
 
 
 class Sequence:
