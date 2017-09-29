@@ -3,6 +3,7 @@ import amino_acid_dictionary
 import Weight_dictionary
 import math
 
+
 class Sequence:
     def __init__(self, fasta):
         self.f = fasta
@@ -52,9 +53,10 @@ class Sequence:
         print('found', len(real_proteins), 'proteins')
         return real_proteins
 
-    def print_protein_list(self, p_list):
+    @ staticmethod
+    def print_protein_list(p_list):
         for element in p_list:
-            print(element[0:5],'...',element[-5:],'size', len(element), 'bp')
+            print(element[0:5], '...', element[-5:], 'size', len(element), 'bp')
 
     def protein_factory(self):
         list0 = []
@@ -91,7 +93,7 @@ class Protein:
     def translate(self):
         bases = self.base_list
         dict0 = amino_acid_dictionary.amino_acids
-        list0 =[]
+        list0 = []
         for base in bases:
             list0.append(dict0[base])
         return list0
@@ -116,9 +118,9 @@ class Protein:
                 y = x/10
                 print_size = 10
                 y_ground = math.floor(y)
-                if y <= print_size:
+                if x <= print_size:
                     print(self.amino_list)
-                if y > print_size:
+                if x > print_size:
                     index = 0
                     n_index = print_size
                     for c in range(int(y_ground)):
@@ -132,9 +134,9 @@ class Protein:
                 y = x / 10
                 print_size = 10
                 y_ground = math.floor(y)
-                if y <= print_size:
+                if x <= print_size:
                     print(self.base_list)
-                if y > print_size:
+                if x > print_size:
                     index = 0
                     n_index = print_size
                     for c in range(int(y_ground)):
