@@ -127,9 +127,21 @@ class Protein:
                         n_index += print_size
                         if n_index >= x:
                             print(self.amino_list[index:])
-
-
             if answer == 'b':
-                print(self.base_sequence)
+                x = len(self.base_list)
+                y = x / 10
+                print_size = 10
+                y_ground = math.floor(y)
+                if y <= print_size:
+                    print(self.base_list)
+                if y > print_size:
+                    index = 0
+                    n_index = print_size
+                    for c in range(int(y_ground)):
+                        print(self.base_list[index:n_index])
+                        index += print_size
+                        n_index += print_size
+                        if n_index >= x:
+                            print(self.base_list[index:])
             if answer == 'q':
                 break
