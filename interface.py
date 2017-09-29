@@ -1,6 +1,6 @@
 from Sequence import *
 
-
+#TODO pass s as a paramter. Move compare() to sequence or Protein class
 def compare():
     suspect_protein = []
     for protein in s.protein_object_list:

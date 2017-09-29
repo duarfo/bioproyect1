@@ -107,6 +107,7 @@ class Protein:
             weight += val
         return weight
 
+    #TODO interaction code with input should not be inside the class but rather in your interface
     def protein_display(self):
         print('Your protein has', len(self.base_sequence), 'Base Sequences')
         print('It has', (len(self.amino_list)-1), 'amino acids and a weight of', self.Kda_weight, 'KDa')
