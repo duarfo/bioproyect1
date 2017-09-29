@@ -1,6 +1,7 @@
 import re
 import amino_acid_dictionary
 import Weight_dictionary
+import math
 
 class Sequence:
     def __init__(self, fasta):
@@ -105,13 +106,29 @@ class Protein:
         return weight
 
     def protein_display(self):
-        print('Your protein has', len(self.base_sequence))
+        print('Your protein has', len(self.base_sequence), 'Base Sequences')
         print('It has', (len(self.amino_list)-1), 'amino acids and a weight of', self.Kda_weight, 'KDa')
         while True:
             print('Type "a" to see the amino acid sequence, "b" to see the base sequence and "q" to quit')
             answer = input('>')
             if answer == 'a':
-                print(self.amino_list)
+                x = len(self.amino_list)
+                y = x/10
+                print_size = 10
+                y_ground = math.floor(y)
+                if y <= print_size:
+                    print(self.amino_list)
+                if y > print_size:
+                    index = 0
+                    n_index = print_size
+                    for c in range(int(y_ground)):
+                        print(self.amino_list[index:n_index])
+                        index += print_size
+                        n_index += print_size
+                        if n_index >= x:
+                            print(self.amino_list[index:])
+
+
             if answer == 'b':
                 print(self.base_sequence)
             if answer == 'q':
